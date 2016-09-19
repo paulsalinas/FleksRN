@@ -1,4 +1,8 @@
-import { getSelectMuscleModalVisibility, getExercises } from '../selectors'
+import {
+  getSelectMuscleModalVisibility,
+  getExercises,
+  getMusclesWithSelected
+} from '../selectors'
 
 describe('selectors', () => {
   describe('getSelectMuscleModalVisibility', () => {
@@ -74,4 +78,48 @@ describe('selectors', () => {
 
   })
 
+  describe('getMusclesWithSelected', () => {
+    it('selects proper state', () => {
+      const state = {
+        ui: {
+          selectedMuscles: ['1', '2']
+        },
+        muscles: [
+          {
+            id: '1',
+            name: 'chest'
+          },
+          {
+            id: '2',
+            name: 'back'
+          },
+          {
+            id: '3',
+            name: 'biceps'
+          }
+        ]
+      }
+
+      const expected = [
+        {
+          id: '1',
+          name: 'chest',
+          selected: true
+        },
+        {
+          id: '2',
+          name: 'back',
+          selected: true
+        },
+        {
+          id: '3',
+          name: 'biceps',
+          selected: false
+        }
+      ]
+
+      const result = getMusclesWithSelected(state)
+      expect(result).toEqual(expected)
+    })
+  })
 })

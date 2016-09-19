@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 export const getMuscles = (state) => state.muscles
 const _getExercises = (state) => state.exercises
-
+const _getSelectedMuscles = (state) => state.ui.selectedMuscles
 export const getExercises = createSelector(
   _getExercises,
   getMuscles,
@@ -23,3 +23,14 @@ export const getExercises = createSelector(
 
 export const getSelectMuscleModalVisibility =
   (state) => state.ui.selectMuscleModalVisibility
+
+export const getMusclesWithSelected = createSelector(
+  getMuscles,
+  _getSelectedMuscles,
+  (muscles, selectedMuscles) =>
+    muscles.map((muscle) => ({
+      ...muscle,
+      selected: selectedMuscles.includes(muscle.id)
+    })
+  )
+)
