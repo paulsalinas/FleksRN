@@ -1,0 +1,3 @@
+rootProject.name = 'FleksRN'
+
+include ':app'
