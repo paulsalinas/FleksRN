@@ -1,5 +1,6 @@
 module.exports = {
     "env": {
+        "jest": true,
         "browser": true,
         "commonjs": true,
         "es6": true
@@ -15,12 +16,6 @@ module.exports = {
     "plugins": [
         "react"
     ],
-    "globals": {
-      "test": true,
-      "expect": true,
-      "describe": true,
-      "it": true
-    },
     "rules": {
         "indent": [
             "error",
