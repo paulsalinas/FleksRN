@@ -10,8 +10,9 @@ export const getExercises = createSelector(
     exercises.map((exercise) =>
       Object.assign(
         {},
-        exercise,
         {
+          id: exercise.id,
+          name: exercise.name,
           muscles: exercise
             .muscleIds
             .map((id) => muscles.find(m => m.id === id))
