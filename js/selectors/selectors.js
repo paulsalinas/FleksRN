@@ -1,8 +1,10 @@
 import { createSelector } from 'reselect'
 
-export const getMuscles = (state) => state.muscles
 const _getExercises = (state) => state.exercises
 const _getSelectedMuscles = (state) => state.ui.selectedMuscles
+
+export const getMuscles = (state) => state.muscles
+
 export const getExercises = createSelector(
   _getExercises,
   getMuscles,
