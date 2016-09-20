@@ -17,7 +17,7 @@ describe('exercises', () => {
       }
     ]
 
-    const result = exercises(undefined, action)
+    const result = exercises([], action)
     expect(result).toEqual(expected)
   })
 })
