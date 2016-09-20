@@ -14,7 +14,8 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "flowtype"
     ],
     "rules": {
         "indent": [
