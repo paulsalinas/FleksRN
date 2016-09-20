@@ -1,6 +1,6 @@
 import app from './js/app'
 import {
   AppRegistry,
-} from 'react-native';
+} from 'react-native'
 
-AppRegistry.registerComponent('FleksRN', () => app);
+AppRegistry.registerComponent('FleksRN', () => app)

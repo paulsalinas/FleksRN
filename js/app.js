@@ -5,46 +5,22 @@
  */
 
 import React, { Component } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native'
+import ExerciseList from './components/ExerciseList'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import ui from './reducers/ui'
+import muscles from './reducers/muscles'
+import exercises from './reducers/exercises'
+
+let reducers = combineReducers({ muscles, exercises, ui })
+let store = createStore(reducers)
 
 export default class FleksRN extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Provider store={store}>
+        <ExerciseList/>
+      </Provider>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-})
