@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react'
-import ExerciseList from './components/ExerciseList'
+import FleksTabs from './components/FleksTabs'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import ui from './reducers/ui'
@@ -19,7 +19,7 @@ export default class FleksRN extends Component {
   render() {
     return (
       <Provider store={store}>
-        <ExerciseList/>
+        <FleksTabs/>
       </Provider>
     )
   }

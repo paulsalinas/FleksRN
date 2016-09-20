@@ -10,6 +10,7 @@ import {
   StyleSheet
 } from 'react-native'
 
+import SelectMusclesModal from './SelectMusclesModal'
 import { setMuscleModalVisibility } from './../actions/ui'
 import { bindActionCreators } from 'redux'
 
@@ -48,9 +49,6 @@ class ExerciseList extends Component {
 const ExerciseListContainer = connect(
   (state) => ({
     exercises: getExercises(state)
-  }),
-  (dispatch) => ({
-    exerciseActions: bindActionCreators({ setMuscleModalVisibility }, dispatch)
   })
 )(ExerciseList)
 
