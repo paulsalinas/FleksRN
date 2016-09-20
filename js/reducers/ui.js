@@ -40,7 +40,7 @@ export default function ui (state: State = initialState, action: Action): State 
       }
     )
   case 'DESELECT_MUSCLE':
-    let id = action.id
+    var id = action.id
     return Object.assign(
       {},
       state,

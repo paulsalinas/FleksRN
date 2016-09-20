@@ -1,5 +1,5 @@
 // @flow
-import type { Action } from './types';
+import type { Action } from './types'
 
 export function setMuscleModalVisibility(visibility: boolean): Action {
   return {
