@@ -1,11 +1,24 @@
 // @flow
 import type { Action } from './../actions/types'
 
+const defaultExercises: State = [
+  {
+    id: '1',
+    name: 'chest press',
+    muscleIds: ['1']
+  },
+  {
+    id: '2',
+    name: 'barbell row',
+    muscleIds: ['2']
+  }
+]
+
 type Exercise = { id: string, name: string, muscleIds: Array<string> }
 type State = Array<Exercise>
 
 export default function(
-  state: State = [],
+  state: State = defaultExercises,
   action: Action
 ): State {
   switch(action.type) {
