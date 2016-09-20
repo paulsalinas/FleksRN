@@ -29,20 +29,30 @@ class ExerciseList extends Component {
     const { ds } = this.state
 
     return (
+      <View style={{ flex: 1 }}>
+        <SelectMusclesModal />
         <ListView
           dataSource={ ds.cloneWithRows(exercises) }
           renderRow={
             ( rowData, sectionID, rowID, highlightRow ) =>
-              <TouchableHighlight style={styles.container}
+              <TouchableHighlight
+                style={styles.container}
                 onPress={() => highlightRow(sectionID, rowID) }>
                 <View style={styles.row}>
                   <Text style={{fontSize: 17}}>{rowData.name}</Text>
-                  <Text style={{fontSize: 15}}>{'muscles: ' + rowData.muscles.map((x) => x.name).join(', ')}</Text>
+                  <Text style={{fontSize: 15}}>
+                    { this._formatMuscleString(rowData.muscles) }
+                  </Text>
                 </View>
               </TouchableHighlight>
           }
         />
+      </View>
     )
+  }
+
+  _formatMuscleString(muscles) {
+    return 'muscles: ' + muscles.map((x) => x.name).join(', ')
   }
 }
 
@@ -52,17 +62,16 @@ const ExerciseListContainer = connect(
   })
 )(ExerciseList)
 
-const ExerciseNavigator = ({ exerciseActions }) => {
-  const { setMuscleModalVisibility } = exerciseActions
+const ExerciseNavigator = ({ showModal }) => {
   return (
     <NavigatorIOS
       initialRoute={{
         component: ExerciseListContainer,
         title: 'Exercises',
         rightButtonTitle: 'Add',
-        onRightButtonPress: () => { setMuscleModalVisibility(true) }
+        onRightButtonPress: showModal
       }}
-      style={{flex: 1}}
+      style={{ flex: 1 }}
     />
   )
 }
@@ -70,7 +79,10 @@ const ExerciseNavigator = ({ exerciseActions }) => {
 export default connect (
   null,
   (dispatch) => ({
-    exerciseActions: bindActionCreators({ setMuscleModalVisibility }, dispatch)
+    showModal: bindActionCreators(
+      () => setMuscleModalVisibility(true),
+      dispatch
+     )
   })
 )(ExerciseNavigator)
 
@@ -79,13 +91,12 @@ var styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   row: {
-    flexDirection: 'row',
+    backgroundColor: '#F5FCFF',
     padding: 15,
     borderColor: '#c0c0c0',
     borderStyle: 'solid',
     borderWidth: 0.5,
     flex: 1,
     justifyContent: 'space-between',
-    backgroundColor: '#FFFFFF',
   }
 })
