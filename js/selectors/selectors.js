@@ -26,6 +26,9 @@ export const getExercises = createSelector(
 export const getSelectMuscleModalVisibility =
   (state) => state.ui.selectMuscleModalVisibility
 
+export const getExerciseNameInputText =
+  (state) => state.ui.textInputExerciseName
+
 export const getMusclesWithSelected = createSelector(
   getMuscles,
   _getSelectedMuscles,

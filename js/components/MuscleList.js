@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getMuscles } from './../selectors/selectors'
-import { textInputExerciseName } from './../actions/ui'
+import { getMusclesWithSelected, getExerciseNameInputText } from './../selectors/selectors'
+import {
+  textInputExerciseName,
+  selectMuscle,
+  deselectMuscle
+} from './../actions/ui'
+
 import {
   View,
   Text,
@@ -15,25 +20,20 @@ import {
 } from 'react-native'
 
 class AddButton extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      added: false
-    }
-  }
-
   render() {
+    const { checked, onChange } = this.props
+
     return(
       <TouchableOpacity
-        onPress={ () => {this.setState({ added: !this.state.added })}}
+        onPress={ () => onChange(!checked) }
         activeOpacity={0.8}>
-        { this._renderImage() }
+        { this._renderImage(checked) }
       </TouchableOpacity>
     )
   }
 
-  _renderImage () {
-    return this.state.added ?
+  _renderImage (checked) {
+    return checked ?
       <Image
         source={require('./../../img/ic_check.png')}
         style={{ tintColor: '#0092d7' }}
@@ -44,6 +44,11 @@ class AddButton extends Component {
         style={{ tintColor: '#e04050' }}
       />
   }
+}
+
+AddButton.propTypes = {
+  checked: React.PropTypes.bool.isRequired,
+  onChange: React.PropTypes.func.isRequired
 }
 
 class MuscleList extends Component {
@@ -60,8 +65,12 @@ class MuscleList extends Component {
   }
 
   render() {
-    const { muscles, exerciseName } = this.props
-    const { textInputExerciseName } = this.props.actions
+    const {
+      muscles,
+      exerciseName,
+      onExerciseNameChange,
+      onMuscleSelectChange
+    } = this.props
     const { ds } = this.state
 
     return (
@@ -72,7 +81,7 @@ class MuscleList extends Component {
               <View style={{backgroundColor:'white'}}>
                 <TextInput
                   style={{height: 70, borderColor: 'gray', borderWidth: 1}}
-                  onChangeText={(text) => textInputExerciseName(text)}
+                  onChangeText={ onExerciseNameChange }
                   value={ exerciseName ? exerciseName : '' }
                   placeholder='Enter name here'
                 />
@@ -85,7 +94,10 @@ class MuscleList extends Component {
                 onPress={() => highlightRow(sectionID, rowID) }>
                 <View style={styles.row}>
                   <Text style={{fontSize: 17}}>{rowData.name}</Text>
-                  <AddButton />
+                  <AddButton
+                    checked={ rowData.selected }
+                    onChange={ onMuscleSelectChange(rowData.id) }
+                  />
                 </View>
               </TouchableHighlight>
           }
@@ -97,18 +109,42 @@ class MuscleList extends Component {
 MuscleList.propTypes = {
   muscles: React.PropTypes.array.isRequired,
   exerciseName: React.PropTypes.string.isRequired,
-  actions: React.PropTypes.object.isRequired
+  onExerciseNameChange: React.PropTypes.func.isRequired,
+
+  // curried function
+  onMuscleSelectChange: React.PropTypes.func.isRequired
 }
 
 export default connect(
   (state) => ({
-    muscles : getMuscles(state),
-    exerciseName: state.ui.textInputExerciseName
-  })
-  ,(dispatch) => ({
-    actions: bindActionCreators({ textInputExerciseName }, dispatch)
-  })
-) (MuscleList)
+    muscles : getMusclesWithSelected(state),
+    exerciseName: getExerciseNameInputText(state)
+  }),
+
+  (dispatch) => ({
+    actions: bindActionCreators({
+      textInputExerciseName,
+      selectMuscle,
+      deselectMuscle
+    },
+    dispatch
+    )
+  }),
+
+  (stateProps, dispatchProps, ownProps) => Object.assign(
+    {},
+    ownProps,
+    stateProps,
+    {
+      onExerciseNameChange: dispatchProps.actions.textInputExerciseName,
+      onMuscleSelectChange: (id) => (checked) =>
+        checked ?
+        dispatchProps.actions.selectMuscle(id)
+        :
+        dispatchProps.actions.deselectMuscle(id)
+    }
+  )
+)(MuscleList)
 
 var styles = StyleSheet.create({
   container: {

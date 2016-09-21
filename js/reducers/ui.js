@@ -4,7 +4,7 @@ import type { Action } from './../actions/types'
 type State = {
   selectMuscleModalVisibility: boolean;
   textInputExerciseName: string,
-  selectedMuscles: Array<number>
+  selectedMuscles: Array<string>
 }
 
 const initialState: State = {
