@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -19,7 +21,14 @@ import {
   StyleSheet
 } from 'react-native'
 
+type AddButtonProps = {
+  checked: boolean,
+  onChange: (checked: boolean) => void
+}
+
 class AddButton extends Component {
+  props: AddButtonProps
+
   render() {
     const { checked, onChange } = this.props
 
@@ -46,12 +55,19 @@ class AddButton extends Component {
   }
 }
 
-AddButton.propTypes = {
-  checked: React.PropTypes.bool.isRequired,
-  onChange: React.PropTypes.func.isRequired
+type MuscleListProps = {
+  muscles: {id: string, name: string, selected: boolean },
+  exerciseName: string,
+  onExerciseNameChange: (value: string) => void,
+  onMuscleSelectChange: (id: string) => (checked: boolean) => void
 }
 
 class MuscleList extends Component {
+  props: MuscleListProps
+  state: {
+    ds: ListView
+  }
+
   constructor(props) {
     super(props)
 
@@ -104,15 +120,6 @@ class MuscleList extends Component {
         />
     )
   }
-}
-
-MuscleList.propTypes = {
-  muscles: React.PropTypes.array.isRequired,
-  exerciseName: React.PropTypes.string.isRequired,
-  onExerciseNameChange: React.PropTypes.func.isRequired,
-
-  // curried function
-  onMuscleSelectChange: React.PropTypes.func.isRequired
 }
 
 export default connect(
