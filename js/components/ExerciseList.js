@@ -57,7 +57,7 @@ class ExerciseList extends Component {
 }
 
 ExerciseList.propTypes = {
-  exercises: React.PropTypes.object.isRequired
+  exercises: React.PropTypes.array.isRequired
 }
 
 const ExerciseListContainer = connect(
