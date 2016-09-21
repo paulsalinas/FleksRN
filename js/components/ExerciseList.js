@@ -56,11 +56,16 @@ class ExerciseList extends Component {
   }
 }
 
+ExerciseList.propTypes = {
+  exercises: React.PropTypes.object.isRequired
+}
+
 const ExerciseListContainer = connect(
   (state) => ({
     exercises: getExercises(state)
   })
 )(ExerciseList)
+
 
 const ExerciseNavigator = ({ showModal }) => {
   return (
@@ -74,6 +79,10 @@ const ExerciseNavigator = ({ showModal }) => {
       style={{ flex: 1 }}
     />
   )
+}
+
+ExerciseNavigator.propTypes = {
+  showModal: React.PropTypes.func.isRequired
 }
 
 export default connect (
