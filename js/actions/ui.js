@@ -15,14 +15,14 @@ export function textInputExerciseName(name: string): Action {
   }
 }
 
-export function selectMuscle(id: number): Action {
+export function selectMuscle(id: string): Action {
   return {
     type: 'SELECT_MUSCLE',
     id
   }
 }
 
-export function deselectMuscle(id: number): Action {
+export function deselectMuscle(id: string): Action {
   return {
     type: 'DESELECT_MUSCLE',
     id
