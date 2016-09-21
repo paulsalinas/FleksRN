@@ -45,6 +45,11 @@ class SelectMusclesModal extends Component {
   }
 }
 
+SelectMusclesModal.propTypes = {
+  visibility: React.PropTypes.bool.isRequired,
+  onCancel: React.PropTypes.func.isRequired,
+}
+
 export default connect(
   (state) => ({
     visibility: getSelectMuscleModalVisibility(state),
