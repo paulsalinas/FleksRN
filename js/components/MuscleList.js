@@ -68,7 +68,7 @@ class MuscleList extends Component {
         <ListView
           dataSource={ ds.cloneWithRowsAndSections([muscles]) }
           renderSectionHeader={
-            (sectionData, sectionID) =>(
+            () =>(
               <View style={{backgroundColor:'white'}}>
                 <TextInput
                   style={{height: 70, borderColor: 'gray', borderWidth: 1}}
@@ -92,6 +92,12 @@ class MuscleList extends Component {
         />
     )
   }
+}
+
+MuscleList.propTypes = {
+  muscles: React.PropTypes.array.isRequired,
+  exerciseName: React.PropTypes.string.isRequired,
+  actions: React.PropTypes.object.isRequired
 }
 
 export default connect(
