@@ -6,7 +6,10 @@ import {
   getSelectedMuscles,
   getExerciseNameInputText,
 } from './../selectors/selectors'
-import { setMuscleModalVisibility } from './../actions/ui'
+import {
+  setMuscleModalVisibility,
+  clearExerciseForm
+} from './../actions/ui'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addExercise } from './../actions/exercise'
@@ -30,7 +33,7 @@ class SelectMusclesModal extends Component {
         transparent={this.state.transparent}
         visible={visibility}
       >
-        { this._renderFakeNavBar(onCancel, onDone) }  
+        { this._renderFakeNavBar(onCancel, onDone) }
         <MuscleList/>
       </Modal>
     )
@@ -76,7 +79,8 @@ export default connect(
   (dispatch) => ({
     actions: bindActionCreators({
       setMuscleModalVisibility,
-      addExercise
+      addExercise,
+      clearExerciseForm
     },
     dispatch)
   }),
@@ -93,6 +97,7 @@ export default connect(
           stateProps.selectedMuscles
         )
         dispatchProps.actions.setMuscleModalVisibility(false)
+        dispatchProps.actions.clearExerciseForm()
       }
     }
   )

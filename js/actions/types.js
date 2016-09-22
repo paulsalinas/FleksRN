@@ -6,3 +6,4 @@ export type Action =
 | { type: 'SELECT_MUSCLE', id: string }
 | { type: 'DESELECT_MUSCLE', id: string }
 | { type: 'ADD_EXERCISE', id: string, name: string, muscleIds: Array<string> }
+| { type: 'CLEAR_EXERCISE_FORM' }

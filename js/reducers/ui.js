@@ -15,6 +15,15 @@ const initialState: State = {
 
 export default function ui (state: State = initialState, action: Action): State {
   switch (action.type) {
+  case 'CLEAR_EXERCISE_FORM':
+    return Object.assign(
+      {},
+      state,
+      {
+        textInputExerciseName: '',
+        selectedMuscles: []
+      }
+    )
   case 'MUSCLE_MODAL_VISIBILITY':
     return Object.assign(
         {},

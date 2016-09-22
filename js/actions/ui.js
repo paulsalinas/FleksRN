@@ -28,3 +28,9 @@ export function deselectMuscle(id: string): Action {
     id
   }
 }
+
+export function clearExerciseForm(): Action {
+  return {
+    type: 'CLEAR_EXERCISE_FORM'
+  }
+}
