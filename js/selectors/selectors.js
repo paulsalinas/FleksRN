@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect'
 
 const _getExercises = (state) => state.exercises
-const _getSelectedMuscles = (state) => state.ui.selectedMuscles
+
+export const getSelectedMuscles = (state) => state.ui.selectedMuscles
 
 export const getMuscles = (state) => state.muscles
 
@@ -31,7 +32,7 @@ export const getExerciseNameInputText =
 
 export const getMusclesWithSelected = createSelector(
   getMuscles,
-  _getSelectedMuscles,
+  getSelectedMuscles,
   (muscles, selectedMuscles) =>
     muscles.map((muscle) => ({
       ...muscle,
