@@ -85,7 +85,7 @@ class MuscleList extends Component {
       muscles,
       exerciseName,
       onExerciseNameChange,
-      onMuscleSelectChange
+      onMuscleSelectChange,
     } = this.props
     const { ds } = this.state
 
@@ -149,6 +149,7 @@ export default connect(
         dispatchProps.actions.selectMuscle(id)
         :
         dispatchProps.actions.deselectMuscle(id)
+
     }
   )
 )(MuscleList)
