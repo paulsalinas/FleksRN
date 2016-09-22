@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import MuscleList from './MuscleList'
-import { View, Modal, Text, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Modal,
+  Text,
+  TouchableOpacity,
+  AlertIOS
+ } from 'react-native'
 import {
   getSelectMuscleModalVisibility,
   getSelectedMuscles,
@@ -92,6 +98,14 @@ export default connect(
       visibility: stateProps.visibility,
       onCancel: () => dispatchProps.actions.setMuscleModalVisibility(false),
       onDone: () => {
+        if (stateProps.exerciseName === '' || stateProps.selectedMuscles.length === 0) {
+          AlertIOS.alert(
+            'Error',
+            'The exercise name must not be empty and you must have at least ' +
+            'one muscle selected')
+          return
+        }
+
         dispatchProps.actions.addExercise(
           stateProps.exerciseName,
           stateProps.selectedMuscles
