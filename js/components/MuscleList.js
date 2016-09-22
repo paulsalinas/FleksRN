@@ -65,7 +65,7 @@ type MuscleListProps = {
 class MuscleList extends Component {
   props: MuscleListProps
   state: {
-    ds: ListView
+    ds: ListView.DataSource
   }
 
   constructor(props) {
