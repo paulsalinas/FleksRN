@@ -99,12 +99,20 @@ ExerciseNavigator.propTypes = {
 export default connect (
   null,
   (dispatch) => ({
-    showModal: bindActionCreators(
-      () => setMuscleModalVisibility(true),
+    setMuscleModalVisibility: bindActionCreators(
+      setMuscleModalVisibility,
       dispatch
      )
-  })
-)(ExerciseNavigator)
+  }),
+  (stateProps, dispatchProps, ownProps) => Object.assign(
+    {},
+    ownProps,
+    stateProps,
+    {
+      showModal: () => dispatchProps.setMuscleModalVisibility(true)
+    }
+  )
+) (ExerciseNavigator)
 
 var styles = StyleSheet.create({
   container: {
