@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getExercises } from './../selectors/selectors'
@@ -14,7 +16,16 @@ import SelectMusclesModal from './SelectMusclesModal'
 import { setMuscleModalVisibility } from './../actions/ui'
 import { bindActionCreators } from 'redux'
 
+type Props = {
+  exercises: {id: string, name: string, muscleIds: Array<string>}
+}
+
 class ExerciseList extends Component {
+  props: Props
+  state: {
+    ds: ListView.DataSource
+  }
+
   constructor(props) {
     super(props)
 
