@@ -96,7 +96,13 @@ class MuscleList extends Component {
             () =>(
               <View style={{backgroundColor:'white'}}>
                 <TextInput
-                  style={{height: 70, borderColor: 'gray', borderWidth: 1}}
+                  style={{
+                    height: 70,
+                    borderColor: 'gray',
+                    borderWidth: 1,
+                    textAlign: 'center',
+                    fontSize: 25
+                  }}
                   onChangeText={ onExerciseNameChange }
                   value={ exerciseName ? exerciseName : '' }
                   placeholder='Enter name here'
