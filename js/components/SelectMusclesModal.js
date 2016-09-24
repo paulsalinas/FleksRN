@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react'
 import MuscleList from './MuscleList'
 import {
@@ -20,7 +22,20 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addExercise } from './../actions/exercise'
 
+type Props = {
+  visibility: boolean,
+  onCancel: () => void,
+  onDone: () => void
+}
+
 class SelectMusclesModal extends Component {
+  props: Props
+
+  state: {
+    animationType: string,
+    transparent: boolean
+  }
+
   constructor(props) {
     super(props)
 
@@ -45,7 +60,7 @@ class SelectMusclesModal extends Component {
     )
   }
 
-  _renderFakeNavBar(onCancel, onDone) {
+  _renderFakeNavBar(onCancel: () => void, onDone: () => void) {
     return (
       <View style={{
         height:60,
@@ -69,12 +84,6 @@ class SelectMusclesModal extends Component {
   }
 }
 
-SelectMusclesModal.propTypes = {
-  visibility: React.PropTypes.bool.isRequired,
-  onCancel: React.PropTypes.func.isRequired,
-  onDone: React.PropTypes.func.isRequired
-}
-
 export default connect(
   (state) => ({
     visibility: getSelectMuscleModalVisibility(state),
@@ -83,7 +92,8 @@ export default connect(
   }),
 
   (dispatch) => ({
-    actions: bindActionCreators({
+    ...
+    bindActionCreators({
       setMuscleModalVisibility,
       addExercise,
       clearExerciseForm
@@ -96,7 +106,7 @@ export default connect(
     ownProps,
     {
       visibility: stateProps.visibility,
-      onCancel: () => dispatchProps.actions.setMuscleModalVisibility(false),
+      onCancel: () => dispatchProps.setMuscleModalVisibility(false),
       onDone: () => {
         if (stateProps.exerciseName === '' || stateProps.selectedMuscles.length === 0) {
           AlertIOS.alert(
@@ -106,12 +116,12 @@ export default connect(
           return
         }
 
-        dispatchProps.actions.addExercise(
+        dispatchProps.addExercise(
           stateProps.exerciseName,
           stateProps.selectedMuscles
         )
-        dispatchProps.actions.setMuscleModalVisibility(false)
-        dispatchProps.actions.clearExerciseForm()
+        dispatchProps.setMuscleModalVisibility(false)
+        dispatchProps.clearExerciseForm()
       }
     }
   )
