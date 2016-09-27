@@ -13,7 +13,7 @@ import {
   getSelectMuscleModalVisibility,
   getSelectedMuscles,
   getExerciseNameInputText,
-} from './../selectors/selectors'
+} from './../reducers/selectors'
 import {
   setMuscleModalVisibility,
   clearExerciseForm

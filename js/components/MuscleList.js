@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getMusclesWithSelected, getExerciseNameInputText } from './../selectors/selectors'
+import { getMusclesWithSelected, getExerciseNameInputText } from './../reducers/selectors'
 import {
   textInputExerciseName,
   selectMuscle,

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getExercises } from './../selectors/selectors'
+import { getExercises } from './../reducers/selectors'
 import {
   View,
   Text,
