@@ -25,7 +25,7 @@ const defaultMuscles: State = [
   }
 ]
 
-type Muscle = {
+export type Muscle = {
   id: string,
   name: string
 }

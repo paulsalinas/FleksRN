@@ -14,7 +14,7 @@ const defaultExercises: State = [
   }
 ]
 
-type Exercise = { id: string, name: string, muscleIds: Array<string> }
+export type Exercise = { id: string, name: string, muscleIds: Array<string> }
 type State = Array<Exercise>
 
 export default function(
