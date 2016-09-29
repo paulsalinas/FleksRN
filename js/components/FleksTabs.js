@@ -9,6 +9,7 @@ import {
   TabBarIOS,
 } from 'react-native'
 import ExerciseList from './ExerciseList'
+import WorkoutList from './WorkoutList'
 
 export default class FleksTabs extends Component {
   state = {
@@ -29,6 +30,16 @@ export default class FleksTabs extends Component {
             onPress={() => {
               this.setState({
                 selectedTab: 'workoutsTab',
+              })
+            }}>
+            <WorkoutList />
+          </TabBarIOS.Item>
+          <TabBarIOS.Item
+            title="Exercises Tab"
+            selected={this.state.selectedTab === 'exercisesTab'}
+            onPress={() => {
+              this.setState({
+                selectedTab: 'exercisesTab',
               })
             }}>
             <ExerciseList />
