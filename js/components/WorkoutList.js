@@ -8,13 +8,19 @@ import {
   Text,
   ListView,
   TouchableHighlight,
-  StyleSheet
+  StyleSheet,
+  NavigatorIOS
 } from 'react-native'
 
-type workout = {
+type Workout = {
   id: string,
   name: string,
+  exerciseSetGroups: Array<ExerciseSetGroup>
+}
 
+type ExerciseSetGroup = {
+  exerciseSets: Array<ExerciseSet>,
+  notes: string
 }
 
 type ExerciseSet = {
@@ -22,10 +28,10 @@ type ExerciseSet = {
   reps: number
 }
 
-export class WorkoutList extends Component {
+class WorkoutList extends Component {
   state: {
     ds: ListView.DataSource,
-    workouts: Array<workout>
+    workouts: Array<Workout>
   }
 
   constructor(props: any) {
@@ -37,7 +43,10 @@ export class WorkoutList extends Component {
     })
 
     this.state = {
-      workouts: [],
+      workouts: [
+        {id: '1', name: 'heavy chest', exerciseSetGroups: []},
+        {id: '2', name: 'heavy legs chest', exerciseSetGroups: []}
+      ],
       ds
     }
   }
@@ -61,6 +70,21 @@ export class WorkoutList extends Component {
     )
   }
 }
+
+export default class Nav extends Component {
+  render() {
+    return (
+      <NavigatorIOS
+        initialRoute={{
+          component: WorkoutList,
+          title: 'Workouts'
+        }}
+        style={{ flex: 1 }}
+      />
+    )
+  }
+}
+
 
 var styles = StyleSheet.create({
   container: {
