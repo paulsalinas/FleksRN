@@ -28,7 +28,10 @@ const defaultMuscles: State = [
 
 type State = Array<Muscle>
 
-export default function (state: State = defaultMuscles, action: Action) {
+export default function(
+  state: State = defaultMuscles,
+  action: Action
+) : State {
   switch(action) {
   default:
     return state
