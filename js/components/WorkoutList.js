@@ -77,7 +77,9 @@ export default class Nav extends Component {
       <NavigatorIOS
         initialRoute={{
           component: WorkoutList,
-          title: 'Workouts'
+          title: 'Workouts',
+          rightButtonTitle: 'Add Workout'
+          // onRightButtonPress:
         }}
         style={{ flex: 1 }}
       />

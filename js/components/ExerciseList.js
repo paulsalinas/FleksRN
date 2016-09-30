@@ -16,8 +16,10 @@ import SelectMusclesModal from './SelectMusclesModal'
 import { setMuscleModalVisibility } from './../actions/ui'
 import { bindActionCreators } from 'redux'
 
+import type { Exercise } from './../reducers/types'
+
 type Props = {
-  exercises: {id: string, name: string, muscleIds: Array<string>}
+  exercises: Array<Exercise>
 }
 
 class ExerciseList extends Component {
@@ -67,10 +69,6 @@ class ExerciseList extends Component {
   }
 }
 
-ExerciseList.propTypes = {
-  exercises: React.PropTypes.array.isRequired
-}
-
 const ExerciseListContainer = connect(
   (state) => ({
     exercises: getExercises(state)
@@ -78,7 +76,7 @@ const ExerciseListContainer = connect(
 )(ExerciseList)
 
 
-const ExerciseNavigator = ({ showModal }) => {
+const ExerciseNavigator = ({ showModal }: { showModal: () => void } ) => {
   return (
     <NavigatorIOS
       initialRoute={{
@@ -90,10 +88,6 @@ const ExerciseNavigator = ({ showModal }) => {
       style={{ flex: 1 }}
     />
   )
-}
-
-ExerciseNavigator.propTypes = {
-  showModal: React.PropTypes.func.isRequired
 }
 
 export default connect (

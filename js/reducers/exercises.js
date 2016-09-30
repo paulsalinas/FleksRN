@@ -1,5 +1,6 @@
 // @flow
 import type { Action } from './../actions/types'
+import type { Exercise } from './types'
 
 const defaultExercises: State = [
   {
@@ -14,7 +15,6 @@ const defaultExercises: State = [
   }
 ]
 
-export type Exercise = { id: string, name: string, muscleIds: Array<string> }
 type State = Array<Exercise>
 
 export default function(

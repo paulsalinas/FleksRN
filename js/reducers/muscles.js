@@ -1,5 +1,6 @@
 // @flow
 import type { Action } from './../actions/types'
+import type { Muscle } from './types'
 
 // default muscles used when not using remote
 const defaultMuscles: State = [
@@ -24,11 +25,6 @@ const defaultMuscles: State = [
     name : 'hamstrings'
   }
 ]
-
-export type Muscle = {
-  id: string,
-  name: string
-}
 
 type State = Array<Muscle>
 
